@@ -13,17 +13,24 @@
   </head>
   <body>
     <nav>
-      <div class="nav__logo"><a href="#">Globify</a></div>
+      <div class="nav__logo">
+        <h1><a href="#">Globify</a></h1>
+      </div>
+      <div class="search__box">
+        <input type="text" placeholder="Search" />
+        <i class="ri-search-line"></i>
+      </div>
+      <div class="hamburger-menu">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
       <ul class="nav__links">
         <li class="link">Home</li>
         <li class="link">Features</li>
         <li class="link">About Us</li>
         <li class="link">Contact Us</li>
       </ul>
-      <div class="search__box">
-        <input type="text" placeholder="Search" />
-        <i class="ri-search-line"></i>
-      </div>
     </nav>
 
     <div class="container">
@@ -77,4 +84,23 @@
       </div>
     </div>
   </body>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const hamburgerMenu = document.querySelector(".hamburger-menu");
+      const navLinks = document.querySelector(".nav__links");
+      const content = document.querySelector(".content");
+
+      hamburgerMenu.addEventListener("click", function () {
+        navLinks.classList.toggle("active");
+        content.classList.toggle("menu-active");
+
+        // Adjust content position when menu is active
+        if (content.classList.contains("menu-active")) {
+          content.style.marginTop = navLinks.clientHeight + "px";
+        } else {
+          content.style.marginTop = "0";
+        }
+      });
+    });
+  </script>
 </html>
