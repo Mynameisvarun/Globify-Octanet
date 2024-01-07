@@ -262,6 +262,55 @@ form button {
   transition: 0.4s;
 }
 
+.bar.active:nth-child(1) {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.bar.active:nth-child(2) {
+  opacity: 0;
+}
+
+.bar.active:nth-child(3) {
+  transform: rotate(45deg) translate(-4px, -9px);
+}
+.hamburger-menu.active #bar1 {
+  transform: rotate(-45deg) translate(-3px, 4px);
+}
+
+.hamburger-menu.active #bar2 {
+  opacity: 0;
+}
+
+.hamburger-menu.active #bar3 {
+  transform: rotate(45deg) translate(-5px, -6px);
+}
+
+.cross {
+  width: 30px;
+  height: 3px;
+  background-color: var(--extra-light);
+  position: relative;
+  transition: 0.4s;
+}
+
+.cross:before,
+.cross:after {
+  content: "";
+  width: 30px;
+  height: 3px;
+  background-color: var(--extra-light);
+  position: absolute;
+  transition: 0.4s;
+}
+
+.cross:before {
+  transform: rotate(-45deg);
+}
+
+.cross:after {
+  transform: rotate(45deg);
+}
+
 @media only screen and (max-width: 600px) {
   body {
     background-size: cover;
