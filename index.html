@@ -2,13 +2,121 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TO-DO List</title>
-    <link rel="stylesheet" href="main.css">
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.0.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>VARUN | Globify</title>
   </head>
   <body>
-    
-
+    <nav>
+      <div class="nav__logo">
+        <h1><a href="#">Globify</a></h1>
+      </div>
+      <div class="search__box">
+        <input type="text" placeholder="Search" />
+        <i class="ri-search-line"></i>
+      </div>
+      <div class="hamburger-menu">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      <div class="hamburger-menu" onclick="toggleMenu()">
+        <div class="bar" id="bar1"></div>
+        <div class="bar" id="bar2"></div>
+        <div class="bar" id="bar3"></div>
+      </div>
+      <ul class="nav__links">
+        <li class="link">Home</li>
+        <li class="link">Features</li>
+        <li class="link">About Us</li>
+        <li class="link">Contact Us</li>
+      </ul>
+    </nav>
+    <div class="container">
+      <div class="container__left">
+        <div class="content">
+          <h1>DISCOVERING<br /><span>THE WORLD.</span></h1>
+          <p>
+            Through travel, individuals have the opportunity to immerse
+            themselves in different cultures, try new foods, and witness the
+            beauty of nature. Exploring new places can also challenge one's
+            comfort zone and help to develop important life skills.
+          </p>
+          <div class="btns">
+            <button class="read__more">Read More</button>
+            <button class="our__blogs">Our Blogs</button>
+          </div>
+          <div class="arrows">
+            <span class="chev__left">
+              <i class="ri-arrow-left-s-line"></i>
+            </span>
+            <span class="chev__right">
+              <i class="ri-arrow-right-s-line"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="container__right">
+        <form>
+          <h4>Where you want to go?</h4>
+          <div class="form__group">
+            <label for="destination">Destination</label>
+            <input
+              type="text"
+              name="destination"
+              id="destination"
+              placeholder="Enter destination"
+            />
+          </div>
+          <div class="form__group">
+            <label for="date">Date</label>
+            <input type="text" name="date" id="date" placeholder="dd/mm/yyyy" />
+          </div>
+          <button type="submit">Check travel package</button>
+        </form>
+      </div>
+      <div class="bottom__tracker">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
   </body>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const hamburgerMenu = document.querySelector(".hamburger-menu");
+      const navLinks = document.querySelector(".nav__links");
+      const content = document.querySelector(".content");
+
+      hamburgerMenu.addEventListener("click", function () {
+        navLinks.classList.toggle("active");
+        content.classList.toggle("menu-active");
+        hamburgerMenu.addEventListener("click", function () {
+          hamburgerMenu.classList.toggle("active");
+          navLinks.classList.toggle("active");
+          content.classList.toggle("menu-active");
+
+        // Adjust content position when menu is active
+        if (content.classList.contains("menu-active")) {
+          content.style.marginTop = navLinks.clientHeight + "px";
+        } else {
+          content.style.marginTop = "0";
+        }
+          // Adjust content position when menu is active
+          if (content.classList.contains("menu-active")) {
+            content.style.marginTop = navLinks.clientHeight + "px";
+          } else {
+            content.style.marginTop = "0";
+          }
+        });
+      });
+    });
+  </script>
   </body>
 </html>
