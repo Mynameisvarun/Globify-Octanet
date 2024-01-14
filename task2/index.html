@@ -1,1 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head class="max-w-[30rem] mx-auto rounded-full flex items-center">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TO-DO LIST</title>
+    <link rel="stylesheet" href="./assets/css/main.css" />
+
+    <style>
+      body {
+        touch-action: manipulation; /* Disable double-tap zoom */
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-500">
+    <div
+      class="lg:max-w-xl max-w-sm mx-auto pb-5 bg-gray-800 text-center my-[15vh] rounded-2xl"
+    >
+      <div class="py-8">
+        <h2 class="mb-6 lg:mb-10 text-white font-semibold lg:text-2xl text-lg">
+          TO-DO LIST
+        </h2>
+        <input
+          type="text"
+          placeholder="Write here..."
+          id="textbox"
+          class="w-[90%] placeholder:text-blue-300 px-5 lg:py-3 py-2 rounded-full outline-none lg:text-[20px] text-sm"
+          onkeyup="Enterkeypressed(event)"
+          required
+        />
+      </div>
+
+      <ul id="list-container">
+        <!-- List items will be dynamically added here -->
+      </ul>
+    </div>
+
+    <script>
+      function Enterkeypressed(event) {
+        if (event.key === "Enter") {
+          let inputBox = document.querySelector("#textbox");
+          let inputValue = inputBox.value;
+
+          if (inputValue.trim() !== "") {
+            // Check if the input is not empty or just spaces
+            addToDoList(inputValue);
+            inputBox.value = ""; // Clear the input field
+          } else {
+            inputBox.setCustomValidity("Please enter a task before adding.");
+            inputBox.reportValidity();
+          }
+        }
+      }
+
+      function addToDoList(text) {
+        // Create a new task container
+        let taskContainer = document.createElement("li");
+        taskContainer.className = "m-3 max-w-full";
+
+        // Create a new task with text content
+        let task = document.createElement("div");
+        task.className = "task-style";
+        task.innerHTML = `
+                <div class="ml-4 my-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16">
+                        <path fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m1.75 9.75l2.5 2.5m3.5-4l2.5-2.5m-4.5 4l2.5 2.5l6-6.5"/>
+                    </svg>
+                </div>
+                <div class="ml-4 my-2 max-w-[20rem] break-all">${text}</div>
+            `;
+
+        // Check if it's a mobile screen and add the div inside the list item
+        if (isMobileScreen()) {
+          addMobileDiv(task, taskContainer);
+        } else {
+          // Add click event listener only for large screens
+          task.addEventListener("click", function () {
+            this.classList.toggle("completed-task");
+          });
+
+          // Add double-click event listener only for large screens
+          task.addEventListener("dblclick", function () {
+            this.parentElement.remove();
+          });
+        }
+
+        // Append the new task to the task container
+        taskContainer.appendChild(task);
+
+        // Append the new task container to the list
+        document.getElementById("list-container").appendChild(taskContainer);
+      }
+
+      function addMobileDiv(parentElement, taskContainer) {
+        // Create a wrapper div to move the delete icon to the right end
+        let mobileDivWrapper = document.createElement("div");
+        mobileDivWrapper.className = "flex items-center ml-auto";
+
+        let mobileDiv = document.createElement("div");
+        mobileDiv.className = "ml-6 mr-2"; // Add right margin for space
+        mobileDiv.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" onclick="deleteTask(this)">
+                <path fill="none" stroke="#ffffff" stroke-linecap="round" stroke-width="1.5" d="M9.17 4a3.001 3.001 0 0 1 5.66 0m5.67 2h-17m15.333 2.5l-.46 6.9c-.177 2.654-.265 3.981-1.13 4.79c-.865.81-2.196.81-4.856.81h-.774c-2.66 0-3.991 0-4.856-.81c-.865-.809-.954-2.136-1.13-4.79l-.46-6.9M9.5 11l.5 5m4.5-5l-.5 5"/>
+            </svg>`;
+
+        // Append the new mobile div inside the list item
+        mobileDivWrapper.appendChild(mobileDiv);
+        parentElement.appendChild(mobileDivWrapper);
+      }
+
+      function isMobileScreen() {
+        return window.innerWidth <= 768; // You can adjust this threshold as needed
+      }
+
+      function deleteTask(svgElement) {
+        // Find the parent task container and remove it
+        let taskContainer = svgElement.closest("li");
+        if (taskContainer) {
+          taskContainer.remove();
+        }
+      }
+    </script>
+  </body>
+</html>
 
