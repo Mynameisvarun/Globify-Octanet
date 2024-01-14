@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.task-style {
+  display: flex;
+  align-items: center;
+  background-color: rgb(96 165 250);
+  max-width: 30rem;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 9999px;
+  margin-bottom: 23px;
+}
+
+.completed-task {
+  position: relative;
+}
+
+.completed-task::after {
+  content: "";
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform: translateX(-44%);
+  width: 85%;
+  height: 1.8px; /* Adjust as needed */
+  background-color: black; /* Adjust the color as needed */
+}
